@@ -1,22 +1,22 @@
 package modele.metier;
 
-public class Personne {
+public class Utilisateur {
 
-	protected String nom_utilisateur; 
+	protected String identifiant; 
 	protected String nom; 
 	protected String prenom; 
 	protected int age; 
-	protected int rang;
+	protected Rang rang;
 	protected String mdp;
 
-	public Personne() {
+	public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Personne(String nom_utilisateur, String nom, String prenom, int age, int rang, String mdp) {
+	public Utilisateur(String identifiant, String nom, String prenom, int age, Rang rang, String mdp) {
 		super();
-		this.nom_utilisateur = nom_utilisateur;
+		this.identifiant = identifiant;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.age = age;
@@ -42,20 +42,20 @@ public class Personne {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public int getRang() {
+	public Rang getRang() {
 		return rang;
 	}
-	public void setRang(int rang) {
+	public void setRang(Rang rang) {
 		this.rang = rang;
 	} 
 
-	public String getNom_utilisateur() {
-		return nom_utilisateur;
+	public String getidentifiant() {
+		return identifiant;
 	}
 
 
-	public void setNom_utilisateur(String nom_utilisateur) {
-		this.nom_utilisateur = nom_utilisateur;
+	public void setidentifiant(String identifiant) {
+		this.identifiant = identifiant;
 	}
 
 
@@ -71,7 +71,7 @@ public class Personne {
 
 	@Override
 	public String toString() {
-		return "personne [nom_utilisateur=" + nom_utilisateur + ", nom=" + nom + ", prenom=" + prenom + ", age=" + age + ", rang=" + rang
+		return "Utilisateur [identifiant=" + identifiant + ", nom=" + nom + ", prenom=" + prenom + ", age=" + age + ", rang=" + rang
 				+ "]";
 	}
 
@@ -79,7 +79,7 @@ public class Personne {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nom_utilisateur == null) ? 0 : nom_utilisateur.hashCode());
+		result = prime * result + ((identifiant == null) ? 0 : identifiant.hashCode());
 		return result;
 	}
 
@@ -91,11 +91,11 @@ public class Personne {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Personne other = (Personne) obj;
-		if (nom_utilisateur == null) {
-			if (other.nom_utilisateur != null)
+		Utilisateur other = (Utilisateur) obj;
+		if (identifiant == null) {
+			if (other.identifiant != null)
 				return false;
-		} else if (!nom_utilisateur.equals(other.nom_utilisateur))
+		} else if (!identifiant.equals(other.identifiant))
 			return false;
 		return true;
 	}

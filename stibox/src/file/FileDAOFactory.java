@@ -1,16 +1,22 @@
 package file;
 
-import dao.PersonneDAO;
+import dao.UtilisateurDAO;
 import dao.FamilleDAO;
 import dao.InformationsDAO;
+import dao.RangDAO;
 import dao.DAOFactory;
 import dao.EtatDAO;
 
 public class FileDAOFactory extends DAOFactory {
 
 	@Override
-	public PersonneDAO getPersonneDAO() {
-		return FilePersonneDAO.getInstance();
+	public UtilisateurDAO getUtilisateurDAO() {
+		return FileUtilisateurDAO.getInstance();
+	}
+	
+	@Override
+	public RangDAO getRangDAO() {
+		return FileRangDAO.getInstance();
 	}
 	
 	@Override

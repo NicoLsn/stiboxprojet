@@ -1,9 +1,6 @@
 package stibox;
 
-import java.util.Scanner;
-
 import dao.DAOFactory;
-import modele.metier.Personne;
 
 public class main {
 	private static DAOFactory dao = DAOFactory.getDAOFactory(2);
@@ -17,10 +14,10 @@ public class main {
 	}
 
 	public static void main(String[] args) {
-		dao.getPersonneDAO().existsfile();
-		System.out.println(dao.getPersonneDAO().afficherListe());
-		dao.getPersonneDAO().update();
-		/*Personne p = new Personne();
+		dao.getUtilisateurDAO().existsfile();
+		System.out.println(dao.getUtilisateurDAO().afficherListe());
+		dao.getUtilisateurDAO().update();
+		/*Utilisateur p = new Utilisateur();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Saisir nom d'utilisateur:");
 		String str = sc.next();
@@ -40,9 +37,9 @@ public class main {
 		System.out.println("Saisir le mot de passe:");
 		String strr = sc.next();
 		p.setMdp(strr);
-		dao.getPersonneDAO().ajouter(p);*/
-		/*System.out.println(dao.getPersonneDAO().auth(p));
-		if(dao.getPersonneDAO().auth(p)==1)
+		dao.getUtilisateurDAO().ajouter(p);*/
+		/*System.out.println(dao.getUtilisateurDAO().auth(p));
+		if(dao.getUtilisateurDAO().auth(p)==1)
 			System.out.println("OK");
 		else
 			System.out.println("Non");

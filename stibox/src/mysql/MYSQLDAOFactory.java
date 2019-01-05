@@ -1,16 +1,17 @@
 package mysql;
 
-import dao.PersonneDAO;
+import dao.UtilisateurDAO;
 import dao.FamilleDAO;
 import dao.InformationsDAO;
+import dao.RangDAO;
 import dao.DAOFactory;
 import dao.EtatDAO;
 
 public class MYSQLDAOFactory extends DAOFactory {
 
 	@Override
-	public PersonneDAO getPersonneDAO() {
-		return MYSQLPersonneDAO.getInstance();
+	public UtilisateurDAO getUtilisateurDAO() {
+		return MYSQLUtilisateurDAO.getInstance();
 	}
 	
 	@Override
@@ -26,5 +27,10 @@ public class MYSQLDAOFactory extends DAOFactory {
 	@Override
 	public InformationsDAO getInformationsDAO() {
 		return MYSQLInformationsDAO.getInstance();
+	}
+	
+	@Override
+	public RangDAO getRangDAO() {
+		return MYSQLRangDAO.getInstance();
 	}
 }

@@ -22,8 +22,9 @@ public abstract class DAOFactory  {
 		}
 
 
-	public abstract PersonneDAO getPersonneDAO();
+	public abstract UtilisateurDAO getUtilisateurDAO();
 	public abstract FamilleDAO getFamilleDAO();
+	public abstract RangDAO getRangDAO();
 	public abstract EtatDAO getEtatDAO();
 	public abstract InformationsDAO getInformationsDAO();
 

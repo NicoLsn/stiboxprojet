@@ -13,30 +13,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.DAOFactory;
-import dao.PersonneDAO;
+import dao.RangDAO;
+import modele.metier.Rang;
 import stibox.main;
-import modele.metier.Personne;
 
-public class FilePersonneDAO implements PersonneDAO {
+public class FileRangDAO implements RangDAO {
 	
-	private static FilePersonneDAO instance;
+	private static FileRangDAO instance;
 	DAOFactory daos = main.getDaoFactory();
 
-	private ArrayList<Personne> donnees;
+	private ArrayList<Rang> donnees;
 	LocalDate date;
-	File file = new File("C://Users/nicolas/Desktop/stibox/account.txt");
+	File file = new File("C://Users/nicolas/Desktop/stibox/rang.txt");
 	File folder = new File("C://Users/nicolas/Desktop/stibox");
 
-	public static FilePersonneDAO getInstance(){
+	public static FileRangDAO getInstance(){
 		if (instance==null){
-			instance = new FilePersonneDAO();
+			instance = new FileRangDAO();
 		}
 		return instance;
 	}
 
-	private FilePersonneDAO() {
+	private FileRangDAO() {
 
-		this.donnees = new ArrayList<Personne>();
+		this.donnees = new ArrayList<Rang>();
 
 		try {
 			
@@ -44,7 +44,7 @@ public class FilePersonneDAO implements PersonneDAO {
 			String line = reader.readLine();
 			while(line != null){
 				if(line.equals("*")){
-					this.donnees.add(new Personne(reader.readLine(),reader.readLine(),reader.readLine(),Integer.parseInt(reader.readLine()),Integer.parseInt(reader.readLine()),reader.readLine()));
+					this.donnees.add(new Rang(Integer.parseInt(reader.readLine()),reader.readLine()));
 				}
 				line = reader.readLine();
 			}
@@ -52,17 +52,6 @@ public class FilePersonneDAO implements PersonneDAO {
 		} catch(IOException e){
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public int auth(Personne object){
-		System.out.println(object.toString());
-		Personne p = daos.getPersonneDAO().getById(object);
-		System.out.println(p.getMdp() +" - "+ object.getMdp());
-		if(p.getMdp().equalsIgnoreCase(object.getMdp()))
-			return 1;
-		
-		return 0;
 	}
 	
 	@Override
@@ -95,12 +84,8 @@ public class FilePersonneDAO implements PersonneDAO {
 			PrintWriter pr = new PrintWriter(bw);
 			for (int i = 0; i < donnees.size(); i++) {
 				pr.println("*");
-				pr.println(donnees.get(i).getNom_utilisateur());
-				pr.println(donnees.get(i).getNom());
-				pr.println(donnees.get(i).getPrenom());
-				pr.println(donnees.get(i).getAge());
-				pr.println(donnees.get(i).getRang());
-				pr.println(donnees.get(i).getMdp());
+				pr.println(donnees.get(i).getNo_rang());
+				pr.println(donnees.get(i).getNom_rang());
 			}
 			pr.close();
 			bw.close();
@@ -111,23 +96,19 @@ public class FilePersonneDAO implements PersonneDAO {
 	}
 	
 	@Override
-	public List<Personne> afficherListe() {
+	public List<Rang> afficherListe() {
 		return this.donnees;
 		}
 
 	@Override
-	public void ajouter(Personne objet) {
+	public void ajouter(Rang objet) {
 		try {
 		FileWriter writer = new FileWriter(file, true);
 		BufferedWriter bw = new BufferedWriter(writer);
 		PrintWriter pr = new PrintWriter(bw);
 		pr.println("*");
-		pr.println(objet.getNom_utilisateur());
-		pr.println(objet.getNom());
-		pr.println(objet.getPrenom());
-		pr.println(objet.getAge());
-		pr.println(objet.getRang());
-		pr.println(objet.getMdp());
+		pr.println(objet.getNo_rang());
+		pr.println(objet.getNom_rang());
 		pr.close();
 		bw.close();
 		writer.close();
@@ -137,7 +118,7 @@ public class FilePersonneDAO implements PersonneDAO {
 	}
 	
 	@Override
-	public void modifier(Personne objet) {
+	public void modifier(Rang objet) {
 		// Ne fonctionne que si l'objet métier est bien fait...
 		int idx = this.donnees.indexOf(objet);
 		if (idx == -1) {
@@ -149,7 +130,7 @@ public class FilePersonneDAO implements PersonneDAO {
 	}
 
 	@Override
-	public void supprimer(Personne objet) {
+	public void supprimer(Rang objet) {
 		// Ne fonctionne que si l'objet métier est bien fait...
 		int idx = this.donnees.indexOf(objet);
 		if (idx == -1) {
@@ -161,9 +142,9 @@ public class FilePersonneDAO implements PersonneDAO {
 	}
 
 	@Override
-	public Personne getById(Personne objet) {
+	public Rang getById(Rang objet) {
 		// Ne fonctionne que si l'objet métier est bien fait...
-		Personne p = new Personne(objet.getNom_utilisateur(),"","",0,0,"");
+		Rang p = new Rang(objet.getNo_rang(),"");
 		int idx = this.donnees.indexOf(p);
 		if (idx == -1) {
 			throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
@@ -171,5 +152,4 @@ public class FilePersonneDAO implements PersonneDAO {
 			return this.donnees.get(idx);
 		}
 	}
-
 }
