@@ -135,7 +135,18 @@ public class MYSQLUtilisateurDAO implements UtilisateurDAO {
 
 	@Override
 	public int auth(Utilisateur object) {
-		// TODO Auto-generated method stub
+		Utilisateur u = new Utilisateur();
+		u = getById(object);
+		if(u.getMdp().equalsIgnoreCase(object.getMdp())){
+			String id = u.getidentifiant();
+			String nom = u.getNom();
+			String prenom = u.getPrenom();
+			int age = u.getAge();
+			int rang = u.getRang().getNo_rang();
+			String mdp = u.getMdp();
+			//ICI MET LE CODE POUR ECRIRE DANS LE FICHIER!!! FLORIAN
+			return 1;
+		}
 		return 0;
 	}
 
