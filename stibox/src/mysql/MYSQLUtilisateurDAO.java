@@ -30,7 +30,7 @@ public class MYSQLUtilisateurDAO implements UtilisateurDAO {
 		try {
 			List<Utilisateur> plist = new ArrayList<Utilisateur>();
 			Statement requete = Connexion.getInstance().createStatement();
-			ResultSet res =  requete.executeQuery("SELECT * FROM Utilisateur");
+			ResultSet res =  requete.executeQuery("SELECT * FROM utilisateur");
 			Rang r = new Rang();
 			while (res.next()) {
 				r.setNo_rang(res.getInt(5));
@@ -51,14 +51,13 @@ public class MYSQLUtilisateurDAO implements UtilisateurDAO {
 		try {
 
 			PreparedStatement req = Connexion.getInstance().prepareStatement(
-					"insert into Utilisateur (identifiant,nom,prenom,age,rang) values(?,?,?,?,?,?)");
+					"insert into utilisateur (identifiant,nom,prenom,no_statut,mdp) values(?,?,?,?,?,?)");
 			
 			req.setString(1, p.getidentifiant());	
 			req.setString(2, p.getNom());
 			req.setString(3, p.getPrenom());
-			req.setInt(4, p.getAge());	
-			req.setInt(5, p.getRang().getNo_rang());
-			req.setString(6, p.getMdp());		
+			req.setInt(4, p.getRang().getNo_rang());
+			req.setString(5, p.getMdp());		
 			req.executeUpdate();
 			
 		} catch (SQLException sqle) {
